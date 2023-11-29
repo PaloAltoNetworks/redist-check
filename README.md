@@ -1,4 +1,4 @@
-# ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/palo.ico?raw=t redist-check
+# ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/palo.ico?raw=true) redist-check
 Tool to check for PANOS Devices with Certificates that will expire on 12-31-23
 This tool is for checking PANOS or Panorama and Content Versions of Palo Alto NGFW’s and will inform on which NGFW’s need a PANOS Upgrade or Content Version Update.  You’ll need to create a text file with your PANOS NGFW IP Addresses as such:
 
