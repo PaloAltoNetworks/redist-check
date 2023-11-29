@@ -1,0 +1,4 @@
+Requests==2.31.0
+rich==13.6.0
+urllib3==1.26.4
+xmltodict==0.13.0
