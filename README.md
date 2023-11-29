@@ -20,4 +20,3 @@ The results are color-coded.  If the result is green, then no action needs to be
 
 The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  Below is a screenshot of the page:
 
-![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/web/webpage.png?raw=true)
