@@ -14,6 +14,6 @@ pip3 install -r requirements.txt
 
 Example:
 
-![alt text](https://spring.paloaltonetworks.com/rlemm/redist-check/blob/main/example.png?raw=true)
+![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
 
 The results are color-coded.  If the result is green, then no action needs to be taken.  If the result is in yellow, then one of the actions needs to be taken.  If the result is in red, then both actions need to be taken.
