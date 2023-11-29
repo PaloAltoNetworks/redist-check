@@ -14,8 +14,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import webbrowser
-webbrowser.open('https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE', new = 2)
-webbrowser.open('https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672', new = 2)
+# webbrowser.open('https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE', new = 2)
+# webbrowser.open('https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672', new = 2)
 console = Console()
 
 # print("""Dear Palo Alto Networks Customers,
@@ -730,7 +730,7 @@ def process_list(ip):
                 if panos_version  == "10.1.9-h1":
                     recommended_version = "10.1.9-h3"
                 if panos_version  == "10.2.0":
-                    recommended_version = "CHANGE_ME"
+                    recommended_version = "10.2.3-h9"
                 if panos_version  == "10.2.0-h1":
                     recommended_version = "10.2.3-h9"
                 if panos_version  == "10.2.1":
