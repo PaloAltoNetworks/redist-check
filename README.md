@@ -27,7 +27,7 @@ optional arguments:
   -x          Optional - Disable Links Pop-Up
   -w W        Optional - Create WebPage from output
   -o          Requires '-w' - Open Results in Web Browser
-host'''
+```
 
 
 Example:
