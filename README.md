@@ -16,17 +16,26 @@ Once requirements are installed, the following is an example output on the diffe
 
 ```console
 host % python3 redist-check.py -h
-usage: redist-check.py [-h] [-x] [-w W] [-o]
+usage: redist-check.py [-h] [-x] [-w [W]] [-o]
 
-Usage Example: 
+Usage Examples: 
 
-python redist-check.py -x -w output.html -o
+	python3 redist-check.py
+
+	python3 redist-check.py -x /// This one suppresses PopUp Links
+
+	python3 redist-check.py -x -w yourfile.html -o
+
+	python3 redist-check.py -oxw yourfile.html
+
+	python3 redist-check.py -xw -o /// This one will use output.html by default
 
 optional arguments:
   -h, --help  show this help message and exit
   -x          Optional - Disable Links Pop-Up
-  -w W        Optional - Create WebPage from output
+  -w [W]      Optional - Create WebPage from output.  If no file is specified after '-w', then 'output.html' will be used
   -o          Requires '-w' - Open Results in Web Browser
+
 ```
 
 
