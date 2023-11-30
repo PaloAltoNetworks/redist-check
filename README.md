@@ -14,7 +14,7 @@ pip3 install -r requirements.txt
 
 Once requirements are installed, the following is an example output on the different arguments that can be used for this tool:
 
-host % python3 redist-check.py -h
+'''host % python3 redist-check.py -h
 usage: redist-check.py [-h] [-x] [-w W] [-o]
 
 Usage Example: 
@@ -25,7 +25,7 @@ optional arguments:
   -h, --help  show this help message and exit
   -x          Optional - Disable Links Pop-Up
   -w W        Optional - Create WebPage from output
-  -o          Requires '-w' - Open Results in Web Browser
+  -o          Requires '-w' - Open Results in Web Browser'''
 
 
 Example:
