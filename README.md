@@ -45,7 +45,7 @@ Example:
 
 The results are color-coded.  If the result is green, then no action needs to be taken.  If the result is in yellow, then one of the actions needs to be taken.  If the result is in red, then both actions need to be taken.
 
-You do not have to be superuser to run this sctipt on your host; readonly will work.  
+You do not have to be superuser to run this script on your host; readonly-superuser will work.  
 
 The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  Below is a screenshot of the page:
 
