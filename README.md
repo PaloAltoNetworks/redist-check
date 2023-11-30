@@ -14,7 +14,8 @@ pip3 install -r requirements.txt
 
 Once requirements are installed, the following is an example output on the different arguments that can be used for this tool:
 
-'''host % python3 redist-check.py -h
+```console
+host % python3 redist-check.py -h
 usage: redist-check.py [-h] [-x] [-w W] [-o]
 
 Usage Example: 
