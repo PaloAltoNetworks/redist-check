@@ -26,7 +26,8 @@ optional arguments:
   -h, --help  show this help message and exit
   -x          Optional - Disable Links Pop-Up
   -w W        Optional - Create WebPage from output
-  -o          Requires '-w' - Open Results in Web Browser'''
+  -o          Requires '-w' - Open Results in Web Browser
+host'''
 
 
 Example:
