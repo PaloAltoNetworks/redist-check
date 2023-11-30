@@ -12,6 +12,22 @@ There is a requirements.txt file and you’ll need to run this command in a term
 
 pip3 install -r requirements.txt
 
+Once requirements are installed, the following is an example output on the different arguments that can be used for this tool:
+
+host % python3 redist-check.py -h
+usage: redist-check.py [-h] [-x] [-w W] [-o]
+
+Usage Example: 
+
+python redist-check.py -x -w output.html -o
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -x          Optional - Disable Links Pop-Up
+  -w W        Optional - Create WebPage from output
+  -o          Requires '-w' - Open Results in Web Browser
+
+
 Example:
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
