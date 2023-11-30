@@ -19,11 +19,11 @@ from argparse import RawTextHelpFormatter
 
 parser = argparse.ArgumentParser(add_help=True,
                     formatter_class=RawTextHelpFormatter,
-                    description='Usage Example: \n\npython redist-check.py -x -w output.html -o')
+                    description='Usage Examples: \n\n\tpython3 redist-check.py\n\n\tpython3 redist-check.py -x /// This one suppresses PopUp Links\n\n\tpython3 redist-check.py -x -w yourfile.html -o\n\n\tpython3 redist-check.py -oxw yourfile.html\n\n\tpython3 redist-check.py -xw -o /// This one will use output.html by default')
 
 parser.add_argument("-x", action = "store_true", help="Optional - Disable Links Pop-Up")
 
-parser.add_argument("-w", required='-o' in sys.argv, help="Optional - Create WebPage from output")
+parser.add_argument("-w", required='-o' in sys.argv, nargs='?', const='output.html', help="Optional - Create WebPage from output.  If no file is specified after '-w', then 'output.html' will be used")
 
 parser.add_argument("-o", action = "store_true", help="Requires '-w' - Open Results in Web Browser")
 
