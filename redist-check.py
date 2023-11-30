@@ -613,6 +613,9 @@ def process_list(ip):
             else:
                 recommended_version = "N/A"
 
+            if float(check_version) < 8.1:
+                recommended_version = "8.1.21-h2"
+
             if supported_version == "Yes" and supported_content_version == "Yes":
                 supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on green")
                 supported_devices_count+=1
