@@ -71,7 +71,7 @@ You do not have to be superuser to run this script on your host; readonly-superu
 
 Example:
 
-![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
+![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/output_example.png?raw=true)
 
 Below is a screenshot of the web page:
 
