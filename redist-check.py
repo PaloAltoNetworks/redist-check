@@ -617,30 +617,30 @@ def process_list(ip):
                 recommended_version = "8.1.21-h2"
 
             if supported_version == "Yes" and supported_content_version == "Yes":
-                supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on green")
+                supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                 supported_devices_count+=1
 
             elif supported_version == "No" and supported_content_version == "Yes":
                 if agent_status == "disabled" and client_status == "disabled":
-                    supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on green")
+                    supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
                 else:
-                    os_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on yellow")
+                    os_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                     os_devices_count+=1
 
             elif supported_version == "Yes" and supported_content_version == "No":
-                content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on yellow")
+                content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                 content_devices_count+=1
 
             elif supported_version == "No":
                 if agent_status == "disabled" and client_status == "disabled":
                     if supported_content_version == "No":
-                        content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on yellow")
+                        content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
 
                 else:
                     if supported_content_version == "No":
-                        unsupported_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="white on red")
+                        unsupported_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ff8787")
                         unsupported_devices_count+=1
 
         except IOError:
@@ -684,10 +684,10 @@ print("\n\n")
 results_table = Table(title="Device Summary", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
 results_table.add_column("Status", justify="center")
 results_table.add_column("Device Count", justify="center")
-results_table.add_row("Number of Devices that require a PANOS upgrade and Content update", str(unsupported_devices_count), style="white on red")
-results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on yellow")
-results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on yellow")
-results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on green")
+results_table.add_row("Number of Devices that require a PANOS upgrade and Content update", str(unsupported_devices_count), style="on #ff8787")
+results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on #ffff87")
+results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
+results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
 results_table.add_row("Total Devices", str(total_count))
 console.print(results_table)
 
