@@ -65,15 +65,15 @@ Below is an example of output after running this command:
 ```
 python3 redist-check.py
 ```
-Example:
-
-![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
-
 The results are color-coded.  If the result is green, then no action needs to be taken.  If the result is in yellow, then one of the actions needs to be taken.  If the result is in red, then both actions need to be taken.
 
 You do not have to be superuser to run this script on your host; readonly-superuser will work.  
 
-Below is a screenshot of the page:
+Example:
+
+![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
+
+Below is a screenshot of the web page:
 
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/web/webpage_example.png?raw=true)
