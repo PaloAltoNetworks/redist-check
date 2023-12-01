@@ -19,7 +19,7 @@ https://github.com/PaloAltoNetworks/redist-check/blob/main
 There is a requirements.txt file and you’ll need to run this command in a terminal Window of your host in order to use redist-check.py.  Unpack the contents into a folder of your choice and navigate to the path of that folder via CLI and run the command below:
 
 ```console
-	pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Step 3
