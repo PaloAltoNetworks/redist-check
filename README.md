@@ -1,21 +1,36 @@
 # ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/palo.ico?raw=true) redist-check
-Tool to check for PANOS Devices with Certificates that will expire on 12-31-23
-This tool is for checking PANOS or Panorama and Content Versions of Palo Alto NGFW’s and will inform on which NGFW’s need a PANOS Upgrade or Content Version Update.  You’ll need to create a text file with your PANOS NGFW IP Addresses as such:
+This tool was built to check for PANOS Devices with Certificates that will expire on 12-31-23
+
+The tool can check for PANOS and Content Versions of Palo Alto Networks NGFW & Panorama devices and will determine which devices need a PANOS Upgrade or Content Version Update.  You’ll need to create a text file with your PANOS NGFW IP Addresses as such:
 
 192.168.1.1  
 10.1.1.1  
 172.16.1.1  
 Etc…..  
 
+The tool does require Python Version 3.x or greater to run.  The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  
 
-There is a requirements.txt file and you’ll need to run this command in a terminal Window of your host in order to use redist-check.py:
+## Step 1:
 
-pip3 install -r requirements.txt
+Download the tool from this site:  
 
-Once requirements are installed, the following is an example output on the different arguments that can be used for this tool:
+https://github.com/PaloAltoNetworks/redist-check/blob/main
+
+## Step 1:
+
+There is a requirements.txt file and you’ll need to run this command in a terminal Window of your host in order to use redist-check.py.  Unpack the contents into a folder of your choice and navigate to the path of that folder via CLI and run the command below:
 
 ```console
-host % python3 redist-check.py -h
+	pip3 install -r requirements.txt
+```
+
+## Step 3
+
+Once requirements are installed, you can type 'python3 redist-check.py -h' and the following will display the Usage Examples and different argument options that can be used for this tool:
+
+```console
+python3 redist-check.py -h
+
 usage: redist-check.py [-h] [-x] [-w [W]] [-o]
 
 Usage Examples: 
@@ -38,6 +53,17 @@ optional arguments:
 
 ```
 
+'-x' argument will suppress the Pop-Up Links for the KB and Instructions at the beginning.
+
+'-w' argument will create an HTML file of the results.  You can specify an HTML filename of your choice if desired.
+
+'-o' argument will open the HTML file in your browser at completion.
+
+### All of these arguments are optional and not required.
+
+## Step 4
+
+
 
 Example:
 
@@ -47,7 +73,7 @@ The results are color-coded.  If the result is green, then no action needs to be
 
 You do not have to be superuser to run this script on your host; readonly-superuser will work.  
 
-The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  Below is a screenshot of the page:
+Below is a screenshot of the page:
 
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/web/webpage_example.png?raw=true)
