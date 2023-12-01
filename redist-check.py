@@ -175,10 +175,12 @@ def process_list(ip):
                 agent_status = "enabled"
                 if int(redist_agent_status['response']['result'].split('\n\t')[7].replace("number of clients:", "")) > 0:
                     number_of_clients = str(int(redist_agent_status['response']['result'].split('\n\t')[7].replace("number of clients:", "")))
+            elif "down" in redist_agent_status['response']['result'].split('\n\t')[1]:
+                agent_status = "disabled"
+                number_of_clients = "N/A"
             else:
                 agent_status = "disabled"
                 number_of_clients = "N/A"
-
 
             try:
                 if redist_client_status['response']['result']['entry']:
