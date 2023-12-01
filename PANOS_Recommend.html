@@ -10734,1089 +10734,1090 @@ return jQuery;
         var e = document.getElementById("selected");
         var text = e.options[e.selectedIndex].text;
         var action_text = " - This PAN-OS Version requires attention.  Please upgrade to the following PAN-OS Version - "
+        var content_text = "Please check your Content Version as well.  It should be 8776-8390 or higher."
         var supported = ["8.1.21-h1", "8.1.25-h1", "9.0.16-h5", "9.0.17", "9.0.17-h1", "9.0.17-h2", "9.0.17-h3", "9.1.11-h4", "9.1.12-h6", "9.1.13-h4", "9.1.14-h7", "9.1.16-h3", "9.1.17", "10.0.11-h3", "10.0.12-h3", "10.0.8-h10", "10.1.10", "10.1.10-h1", "10.1.10-h2", "10.1.10-h3", "10.1.10-h4", "10.1.11", "10.1.11-h1", "10.1.3-h3", "10.1.5-h3", "10.1.9-h5", "10.1.6-h7", "10.1.8-h6", "10.1.9-h3", "10.2.3-h9", "10.2.4", "10.2.4-h1", "10.2.4-h2", "10.2.4-h3", "10.2.4-h4", "10.2.5", "10.2.6", "10.2.7", "11.0.0-h1", "11.0.1-h2", "11.0.2", "11.0.2-h1", "11.0.2-h2", "11.0.3", "11.1.0", "11.1.0-b3", "11.1.0-b4"];
         var unsupported = ["8.1.0", "8.1.0-b17", "8.1.0-b28", "8.1.0-b33", "8.1.0-b34", "8.1.0-b41", "8.1.0-b50", "8.1.0-b8", "8.1.1", "8.1.2", "8.1.3", "8.1.4", "8.1.4-h4", "8.1.5", "8.1.5-h1", "8.1.6", "8.1.6-h2", "8.1.6-h3", "8.1.6-h5", "8.1.7", "8.1.8", "8.1.8-h5", "8.1.9", "8.1.9-h4", "8.1.10", "8.1.11", "8.1.12", "8.1.12-h3", "8.1.13", "8.1.13-h1", "8.1.14", "8.1.14-h2", "8.1.15", "8.1.15-h2", "8.1.15-h3", "8.1.15-h5", "8.1.16", "8.1.17", "8.1.18", "8.1.19", "8.1.20", "8.1.20-h1", "8.1.21", "8.1.21-h1", "8.1.22", "8.1.23", "8.1.23-h1", "8.1.24", "8.1.24-h1", "8.1.24-h2", "8.1.25", "9.0.0", "9.0.0-b11", "9.0.0-b22", "9.0.0-b28", "9.0.0-b34", "9.0.0-b39", "9.0.0-b7", "9.0.1", "9.0.2", "9.0.2-h4", "9.0.3", "9.0.3-h2", "9.0.3-h3", "9.0.4", "9.0.5", "9.0.5-h1", "9.0.5-h4", "9.0.6", "9.0.6-h1", "9.0.7", "9.0.8", "9.0.9", "9.0.9-h1", "9.0.9-h2", "9.0.10", "9.0.11", "9.0.12", "9.0.13", "9.0.14", "9.0.14-h3", "9.0.14-h4", "9.0.15", "9.0.16", "9.0.16-h2", "9.0.16-h3", "9.0.16-h4", "9.1.0", "9.1.1", "9.1.2", "9.1.2-h1", "9.1.3", "9.1.3-h1", "9.1.4", "9.1.5", "9.1.6", "9.1.7", "9.1.8", "9.1.9", "9.1.10", "9.1.11", "9.1.11-h2", "9.1.11-h3", "9.1.12", "9.1.12-h3", "9.1.13", "9.1.13-h1", "9.1.13-h3", "9.1.14", "9.1.14-h1", "9.1.14-h4", "9.1.14-h5", "9.1.15", "9.1.15-h1", "9.1.16", "10.0.0", "10.0.0-b61", "10.0.1", "10.0.1-c59", "10.0.1-c70", "10.0.2", "10.0.2-c46", "10.0.3", "10.0.3-c31", "10.0.3-c45", "10.0.4", "10.0.4-h2", "10.0.5", "10.0.6", "10.0.7", "10.0.8", "10.0.8-h4", "10.0.8-h8", "10.0.9", "10.0.9-c46", "10.0.10", "10.0.10-h1", "10.0.11", "10.0.11-h1", "10.0.12", "10.0.12-h1", "10.1.0", "10.1.0-b10", "10.1.0-b17", "10.1.0-b6", "10.1.1", "10.1.2", "10.1.3", "10.1.4", "10.1.4-h3", "10.1.4-h4", "10.1.5", "10.1.5-h1", "10.1.5-h2", "10.1.6", "10.1.6-h3", "10.1.6-h5", "10.1.6-h6", "10.1.7", "10.1.8", "10.1.8-h1", "10.1.8-h2", "10.1.8-h4", "10.1.9", "10.1.9-h1", "10.2.0", "10.2.0-h1", "10.2.1", "10.2.2", "10.2.2-h2", "10.2.3", "10.2.3-h2", "10.2.3-h4", "11.0.0", "11.0.0-b2.dev_e_rel", "11.0.0-b3.dev_e_rel", "11.0.0-b4.dev_e_rel", "11.0.0-b5.dev_e_rel", "11.0.0-c1361", "11.0.1"]
         if (supported.indexOf(text) !== -1) {
-            alert(text + " - No further Action Needed")
+            alert(text + " - PAN-OS Upgrade Not Required for this Advisory.  " + "\n\n" + content_text)
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b17") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b28") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b33") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b34") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b41") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b50") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.0-b8") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.1") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.2") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.3") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.4") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.4-h4") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.5") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.5-h1") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.6") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.6-h2") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.6-h3") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.6-h5") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.7") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.8") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.8-h5") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.9") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.9-h4") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.10") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.11") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.12") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.12-h3") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.13") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.13-h1") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.14") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.14-h2") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.15") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.15-h2") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.15-h3") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.15-h5") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.16") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.17") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.18") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.19") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.20") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.20-h1") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.21") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.21-h1") {
             var recommended_version = "8.1.21-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.22") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.23") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.23-h1") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.24") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.24-h1") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.24-h2") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "8.1.25") {
             var recommended_version = "8.1.25-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b11") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b22") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b28") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b34") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b39") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.0-b7") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.1") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.2") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.2-h4") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.3") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.3-h2") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.3-h3") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.4") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.5") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.5-h1") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.5-h4") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.6") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.6-h1") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.7") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.8") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.9") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.9-h1") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.9-h2") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.10") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.11") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.12") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.13") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.14") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.14-h3") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.14-h4") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.15") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.16") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.16-h2") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.16-h3") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.0.16-h4") {
             var recommended_version = "9.0.16-h5"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.0") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.1") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.2") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.2-h1") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.3") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.3-h1") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.4") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.5") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.6") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.7") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.8") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.9") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.10") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.11") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.11-h2") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.11-h3") {
             var recommended_version = "9.1.11-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.12") {
             var recommended_version = "9.1.12-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.12-h3") {
             var recommended_version = "9.1.12-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.13") {
             var recommended_version = "9.1.13-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.13-h1") {
             var recommended_version = "9.1.13-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.13-h3") {
             var recommended_version = "9.1.13-h4"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.14") {
             var recommended_version = "9.1.14-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.14-h1") {
             var recommended_version = "9.1.14-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.14-h4") {
             var recommended_version = "9.1.14-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.14-h5") {
             var recommended_version = "9.1.14-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.15") {
             var recommended_version = "9.1.16-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.15-h1") {
             var recommended_version = "9.1.16-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "9.1.16") {
             var recommended_version = "9.1.16-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.0") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.0-b61") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.1") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.1-c59") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.1-c70") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.2") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.2-c46") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.3") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.3-c31") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.3-c45") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.4") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.4-h2") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.5") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.6") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.7") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.8") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.8-h4") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.8-h8") {
             var recommended_version = "10.0.8-h10"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.9") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.9-c46") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.10") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.10-h1") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.11") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.11-h1") {
             var recommended_version = "10.0.11-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.12") {
             var recommended_version = "10.0.12-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.0.12-h1") {
             var recommended_version = "10.0.12-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.0") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.0-b10") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.0-b17") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.0-b6") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.1") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.2") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.3") {
             var recommended_version = "10.1.3-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.4") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.4-h3") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.4-h4") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.5") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.5-h1") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.5-h2") {
             var recommended_version = "10.1.5-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.6") {
             var recommended_version = "10.1.6-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.6-h3") {
             var recommended_version = "10.1.6-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.6-h5") {
             var recommended_version = "10.1.6-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.6-h6") {
             var recommended_version = "10.1.6-h7"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.7") {
             var recommended_version = "10.1.8-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.8") {
             var recommended_version = "10.1.8-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.8-h1") {
             var recommended_version = "10.1.8-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.8-h2") {
             var recommended_version = "10.1.8-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.8-h4") {
             var recommended_version = "10.1.8-h6"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.9") {
             var recommended_version = "10.1.9-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.1.9-h1") {
             var recommended_version = "10.1.9-h3"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.0") {
             var recommended_version = "CHANGE_ME"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.0-h1") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.1") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.2") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.2-h2") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.3") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.3-h2") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "10.2.3-h4") {
             var recommended_version = "10.2.3-h9"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0-b2.dev_e_rel") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0-b3.dev_e_rel") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0-b4.dev_e_rel") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0-b5.dev_e_rel") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.0-c1361") {
             var recommended_version = "11.0.0-h1"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
         if (unsupported.indexOf(text) !== -1) {
             if (text == "11.0.1") {
             var recommended_version = "11.0.1-h2"
-            alert(text + action_text + recommended_version)
+            alert(text + action_text + recommended_version + "\n\n" + content_text)
         		}
         }
     }
@@ -12207,7 +12208,6 @@ return jQuery;
         padding: 0px;
     }
 </style>
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div _ngcontent-c4="" class="brand-container mr-auto">
       <a _ngcontent-c4="" class="navbar-brand" href="javascript:;">
@@ -12227,54 +12227,6 @@ return jQuery;
         <div style="width: auto; border: 0px solid blue; display: inline-block; position: relative; float: left;">
             <div class="widebox">
                 <select name="8.1.0" id="selected" class="form-control">
-                    <!-- <option value="8.0.0">8.0.0</option>
-                    <option value="8.0.0-b12">8.0.0-b12</option>
-                    <option value="8.0.0-b16">8.0.0-b16</option>
-                    <option value="8.0.0-b19">8.0.0-b19</option>
-                    <option value="8.0.0-b29">8.0.0-b29</option>
-                    <option value="8.0.0-b6">8.0.0-b6</option>
-                    <option value="8.0.0-b9">8.0.0-b9</option>
-                    <option value="8.0.0-c14.gtp">8.0.0-c14.gtp</option>
-                    <option value="8.0.0-c27.gtp">8.0.0-c27.gtp</option>
-                    <option value="8.0.0-c31.gtp">8.0.0-c31.gtp</option>
-                    <option value="8.0.0-c40.gtp">8.0.0-c40.gtp</option>
-                    <option value="8.0.0-c6.gtp">8.0.0-c6.gtp</option>
-                    <option value="8.0.1">8.0.1</option>
-                    <option value="8.0.10">8.0.10</option>
-                    <option value="8.0.11-h1">8.0.11-h1</option>
-                    <option value="8.0.12">8.0.12</option>
-                    <option value="8.0.12-h1">8.0.12-h1</option>
-                    <option value="8.0.13">8.0.13</option>
-                    <option value="8.0.14">8.0.14</option>
-                    <option value="8.0.15">8.0.15</option>
-                    <option value="8.0.16">8.0.16</option>
-                    <option value="8.0.17">8.0.17</option>
-                    <option value="8.0.18">8.0.18</option>
-                    <option value="8.0.19">8.0.19</option>
-                    <option value="8.0.19-h1">8.0.19-h1</option>
-                    <option value="8.0.2">8.0.2</option>
-                    <option value="8.0.20">8.0.20</option>
-                    <option value="8.0.3">8.0.3</option>
-                    <option value="8.0.3-h4">8.0.3-h4</option>
-                    <option value="8.0.4">8.0.4</option>
-                    <option value="8.0.4-c10">8.0.4-c10</option>
-                    <option value="8.0.4-c20">8.0.4-c20</option>
-                    <option value="8.0.4-c45">8.0.4-c45</option>
-                    <option value="8.0.4-h4">8.0.4-h4</option>
-                    <option value="8.0.5">8.0.5</option>
-                    <option value="8.0.5-h4">8.0.5-h4</option>
-                    <option value="8.0.5-h5">8.0.5-h5</option>
-                    <option value="8.0.6">8.0.6</option>
-                    <option value="8.0.6-h3">8.0.6-h3</option>
-                    <option value="8.0.7">8.0.7</option>
-                    <option value="8.0.7-h2">8.0.7-h2</option>
-                    <option value="8.0.7-h5">8.0.7-h5</option>
-                    <option value="8.0.8">8.0.8</option>
-                    <option value="8.0.8-h1">8.0.8-h1</option>
-                    <option value="8.0.9">8.0.9</option>
-                    <option value="8.0.9-h1">8.0.9-h1</option>
-                    <option value="8.0.9-h3">8.0.9-h3</option>
-                    <option value="8.0.9-h4">8.0.9-h4</option> -->
                     <option value="8.1.0">8.1.0</option>
                     <option value="8.1.0-b17">8.1.0-b17</option>
                     <option value="8.1.0-b28">8.1.0-b28</option>
@@ -12508,12 +12460,6 @@ return jQuery;
     <br><br><br>&nbsp&nbsp
     <button onclick="getOption()" class="btn btn-info btn-general waves-effect" enabled>Submit</button>
     <br><br>&nbsp&nbsp
-    <!-- <a href="https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE" target="_blank">KB Article - PAN-OS Root and Default Certificate Expiration on December 31, 2023</a>
-    <br>&nbsp&nbsp
-    <a href="https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672" target="_blank">Link to Advisory and Instructions</a>
-    <br>&nbsp&nbsp
-    <a href="https://live.paloaltonetworks.com/t5/pan-os-root-and-default/bd-p/PAN-OS-Root-and-DCE-QA" target="_blank">PAN-OS Root and Default Certificate Expiration Q&A</a>
-    <br>&nbsp&nbsp -->
     <a href="https://docs.paloaltonetworks.com/pan-os/11-1/pan-os-upgrade" target="_blank">PAN-OS Upgrade Guide</a>
     <br>&nbsp&nbsp
     <a href="https://support.paloaltonetworks.com/" target="_blank">Open a TAC Case</a>
@@ -12534,99 +12480,5 @@ return jQuery;
             line-height: 0px;
         }
     </style>
-    <div>
-        <!-- <table>
-            <caption style="caption-side:top; text-align:center">PAN-OS Upgrade Reference Table</caption>
-            <tr>
-                <td width="196.469px">
-                    <p><strong>Current PAN-OS Version</strong></p>
-                </td>
-                <td width="189.531px">
-                    <p><strong>Upgrade Target Version</strong></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>8.1</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>8.1.21-h2</span></p>
-                    <p><span>8.1.25-h1 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>9.0</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>9.0.16-h5 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>9.1</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>9.1.11-h4</span></p>
-                    <p><span>9.1.12-h6</span></p>
-                    <p><span>9.1.13-h4</span></p>
-                    <p><span>9.1.14-h7</span></p>
-                    <p><span>9.1.16-h3&nbsp;</span></p>
-                    <p><span>9.1.17 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>10.0</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>10.0.8-h10</span></p>
-                    <p><span>10.0.11-h3</span></p>
-                    <p><span>10.0.12-h3 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>10.1</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>10.1.3-h2</span></p>
-                    <p><span>10.1.5-h3</span></p>
-                    <p><span>10.1.6-h7</span></p>
-                    <p><span>10.1.8-h6</span></p>
-                    <p><span>10.1.9-h3</span></p>
-                    <p><span>10.1.10 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>10.2</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>10.2.3-h9</span></p>
-                    <p><span>10.2.4 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>11.0</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>11.0.0-h1</span></p>
-                    <p><span>11.0.1-h2</span></p>
-                    <p><span>11.0.2 or greater</span></p>
-                </td>
-            </tr>
-            <tr>
-                <td width="196.469px">
-                    <p><span>11.1</span></p>
-                </td>
-                <td width="189.531px">
-                    <p><span>11.1.0 or greater</span></p>
-                </td>
-            </tr>
-        </table>
-    </div> -->
-</div>
 </body>
 </html>
