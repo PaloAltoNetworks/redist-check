@@ -13,7 +13,7 @@ Download the tool from this site:
 
 https://github.com/PaloAltoNetworks/redist-check/blob/main
 
-## Step 1:
+## Step 2:
 
 There is a requirements.txt file and you’ll need to run this command in a terminal Window of your host in order to use redist-check.py.  Unpack the contents into a folder of your choice and navigate to the path of that folder via CLI and run the command below:
 
