@@ -5,7 +5,7 @@ This tool was built to check for PANOS Devices with Certificates that will expir
 10.1.1.1
 172.16.1.1
 ```
-The tool does require Python Version 3.x or greater to run.  The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  
+Any text editor will do as long as you save it as basic text format.  The tool does require Python Version 3.x or greater to run.  The 'web' folder also has a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  
 
 ## Step 1:
 
@@ -60,8 +60,11 @@ optional arguments:
 
 ## Step 4
 
+Below is an example of output after running this command:
 
-
+```
+python3 redist-check.py
+```
 Example:
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/example.png?raw=true)
