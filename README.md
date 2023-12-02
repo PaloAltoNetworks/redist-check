@@ -5,7 +5,10 @@ This tool was built to check for PANOS Devices with Certificates that will expir
 10.1.1.1
 172.16.1.1
 ```
-Any text editor will do as long as you save it in basic text format.  The tool does require Python Version 3.x or greater to run.  The 'PANOS_Recommend.html' file is a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  
+Any text editor will do as long as you save it in basic text format.  The tool does require Python Version 3.x or greater to run.  The 'PANOS_Recommend.html' file is a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  For further details, please refer to these links below:
+
+# ![alt text](https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE)
+# ![alt text](https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672)
 
 ## Step 1:
 
