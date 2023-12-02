@@ -106,6 +106,7 @@ supported_devices_count=0
 os_devices_count=0
 content_devices_count=0
 unsupported_devices_count=0
+devices_failed=0
 
 def get_devices():
     try:
@@ -130,7 +131,7 @@ def get_devices():
         # pass
 
 def process_list(ip):
-    global supported_devices_count, os_devices_count,content_devices_count, unsupported_devices_count
+    global supported_devices_count, os_devices_count,content_devices_count, unsupported_devices_count, devices_failed
     skip = False
     redist_agent_response = ''
     sys_info_response = ''
@@ -145,13 +146,13 @@ def process_list(ip):
     try:
         uri = "/api/?type=keygen&user=" + username + "&password=" + password
         full_url = "https://" + ip + uri
-        api_response = requests.get(full_url, verify=False, timeout=15)
+        api_response = requests.post(full_url, verify=False, timeout=15)
         result_dict = xmltodict.parse(api_response.text)
         api_key = result_dict['response']['result']['key']
         #logging.debug("API Key: " + api_key)
         uri1 = "/api/?type=op&cmd=<show><system><info></info></system></show>&key=" + api_key
         full_url = "https://" + ip + uri1
-        sys_info_response = requests.get(full_url, verify=False)
+        sys_info_response = requests.post(full_url, verify=False)
         dev_name_version = xmltodict.parse(sys_info_response.text)
         model = dev_name_version['response']['result']['system']['model']
         devicename =  dev_name_version['response']['result']['system']['devicename']
@@ -165,10 +166,10 @@ def process_list(ip):
         if float(check_version) < 10:
             uri4 = "/api/?type=op&cmd=<show><user><user-id-service><status></status></user-id-service></user></show>&key=" + api_key
             full_url = "https://" + ip + uri4
-            userid_service_response = requests.get(full_url, verify=False)
+            userid_service_response = requests.post(full_url, verify=False)
             uri5 = "/api/?type=op&cmd=<show><user><user-id-agent><statistics></statistics></user-id-agent></user></show>&key=" + api_key
             full_url = "https://" + ip + uri5
-            userid_client_response = requests.get(full_url, verify=False)
+            userid_client_response = requests.post(full_url, verify=False)
             redist_agent_status = xmltodict.parse(userid_service_response.text)
             redist_client_status = xmltodict.parse(userid_client_response.text)
             if "up" in redist_agent_status['response']['result'].split('\n\t')[1]:
@@ -193,10 +194,10 @@ def process_list(ip):
         if float(check_version) >= 10:
             uri2 = "/api/?type=op&cmd=<show><redistribution><service><status/></service></redistribution></show>&key=" + api_key
             full_url = "https://" + ip + uri2
-            redist_agent_response = requests.get(full_url, verify=False)
+            redist_agent_response = requests.post(full_url, verify=False)
             uri3 = "/api/?type=op&cmd=<show><redistribution><agent><state>all</state></agent></redistribution></show>&key=" + api_key
             full_url = "https://" + ip + uri3
-            redist_client_response = requests.get(full_url, verify=False)
+            redist_client_response = requests.post(full_url, verify=False)
             redist_agent_status = xmltodict.parse(redist_agent_response.text)
             redist_client_status = xmltodict.parse(redist_client_response.text)
             if redist_agent_status['response']['result']['entry']['status'] == 'up':
@@ -216,21 +217,25 @@ def process_list(ip):
 
     except IOError:
         logging.error("IP Address: "+ip+" connection was refused. Please check connectivity.")
+        devices_failed+=1
         skip = True
         pass
 
     except KeyError:
         logging.error(ip+" Incorrect Username/Password, Command not supported on this platform or API Access is not allowed on this user account.")
+        devices_failed+=1
         skip = True
         pass
 
     except AttributeError:
         logging.error("No API key was returned.  Insufficient privileges or incorrect credentials given.")
+        devices_failed+=1
         skip = True
         pass
 
     except:
         print(ip, "Had an Issue.  Please Investigate.")
+        devices_failed+=1
         skip = True
         pass
 
@@ -252,363 +257,41 @@ def process_list(ip):
                 supported_content_version = "No"
 
             if panos_version in unfixed_versions:
-                if panos_version  == "8.1.0":
+                if panos_version  == "8.1.0" or "8.1.0-b17" or "8.1.0-b28" or "8.1.0-b33" or "8.1.0-b34" or "8.1.0-b41" or "8.1.0-b50" or "8.1.0-b8" or "8.1.1" or "8.1.2" or "8.1.3" or "8.1.4" or "8.1.4-h4" or "8.1.5" or "8.1.5-h1" or "8.1.6" or "8.1.6-h2" or "8.1.6-h3" or "8.1.6-h5" or "8.1.7" or "8.1.8" or "8.1.8-h5" or "8.1.9" or "8.1.9-h4" or "8.1.10" or "8.1.11" or "8.1.12" or "8.1.12-h3" or "8.1.13" or "8.1.13-h1" or "8.1.14" or "8.1.14-h2" or "8.1.15" or "8.1.15-h2" or "8.1.15-h3" or "8.1.15-h5" or "8.1.16" or "8.1.17" or "8.1.18" or "8.1.19" or "8.1.20" or "8.1.20-h1" or "8.1.21" or "8.1.21-h1":
                     recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b17":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b28":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b33":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b34":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b41":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b50":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.0-b8":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.1":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.2":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.3":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.4":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.4-h4":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.5":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.5-h1":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.6":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.6-h2":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.6-h3":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.6-h5":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.7":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.8":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.8-h5":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.9":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.9-h4":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.10":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.11":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.12":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.12-h3":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.13":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.13-h1":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.14":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.14-h2":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.15":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.15-h2":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.15-h3":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.15-h5":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.16":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.17":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.18":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.19":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.20":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.20-h1":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.21":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.21-h1":
-                    recommended_version = "8.1.21-h2"
-                if panos_version  == "8.1.22":
+                if panos_version  == "8.1.22" or "8.1.23" or "8.1.23-h1" or "8.1.24" or "8.1.24-h1" or "8.1.24-h2" or "8.1.25":
                     recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.23":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.23-h1":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.24":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.24-h1":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.24-h2":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "8.1.25":
-                    recommended_version = "8.1.25-h1"
-                if panos_version  == "9.0.0":
+                if panos_version  == "9.0.0" or "9.0.0-b11" or "9.0.0-b22" or "9.0.0-b28" or "9.0.0-b34" or "9.0.0-b39" or "9.0.0-b7" or "9.0.1" or "9.0.2" or "9.0.2-h4" or "9.0.3" or "9.0.3-h2" or "9.0.3-h3" or "9.0.4" or "9.0.5" or "9.0.5-h1" or "9.0.5-h4" or "9.0.6" or "9.0.6-h1" or "9.0.7" or "9.0.8" or "9.0.9" or "9.0.9-h1" or "9.0.9-h2" or "9.0.10" or "9.0.11" or "9.0.12" or "9.0.13" or "9.0.14" or "9.0.14-h3" or "9.0.14-h4" or "9.0.15" or "9.0.16" or "9.0.16-h2" or "9.0.16-h3" or "9.0.16-h4":
                     recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b11":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b22":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b28":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b34":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b39":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.0-b7":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.1":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.2":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.2-h4":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.3":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.3-h2":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.3-h3":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.4":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.5":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.5-h1":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.5-h4":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.6":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.6-h1":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.7":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.8":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.9":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.9-h1":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.9-h2":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.10":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.11":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.12":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.13":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.14":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.14-h3":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.14-h4":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.15":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.16":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.16-h2":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.16-h3":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.0.16-h4":
-                    recommended_version = "9.0.16-h5"
-                if panos_version  == "9.1.0":
+                if panos_version  == "9.1.0" or "9.1.1" or "9.1.2" or "9.1.2-h1" or "9.1.3" or "9.1.3-h1" or "9.1.4" or "9.1.5" or "9.1.6" or "9.1.7" or "9.1.8" or "9.1.9" or "9.1.10" or "9.1.11" or "9.1.11-h2" or "9.1.11-h3":
                     recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.1":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.2":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.2-h1":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.3":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.3-h1":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.4":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.5":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.6":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.7":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.8":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.9":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.10":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.11":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.11-h2":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.11-h3":
-                    recommended_version = "9.1.11-h4"
-                if panos_version  == "9.1.12":
+                if panos_version  == "9.1.12" or "9.1.12-h3":
                     recommended_version = "9.1.12-h6"
-                if panos_version  == "9.1.12-h3":
-                    recommended_version = "9.1.12-h6"
-                if panos_version  == "9.1.13":
+                if panos_version  == "9.1.13" or "9.1.13-h1" or "9.1.13-h3":
                     recommended_version = "9.1.13-h4"
-                if panos_version  == "9.1.13-h1":
-                    recommended_version = "9.1.13-h4"
-                if panos_version  == "9.1.13-h3":
-                    recommended_version = "9.1.13-h4"
-                if panos_version  == "9.1.14":
+                if panos_version  == "9.1.14" or "9.1.14-h1" or "9.1.14-h4" or "9.1.14-h5":
                     recommended_version = "9.1.14-h7"
-                if panos_version  == "9.1.14-h1":
-                    recommended_version = "9.1.14-h7"
-                if panos_version  == "9.1.14-h4":
-                    recommended_version = "9.1.14-h7"
-                if panos_version  == "9.1.14-h5":
-                    recommended_version = "9.1.14-h7"
-                if panos_version  == "9.1.15":
+                if panos_version  == "9.1.15" or "9.1.15-h1" or "9.1.16":
                     recommended_version = "9.1.16-h3"
-                if panos_version  == "9.1.15-h1":
-                    recommended_version = "9.1.16-h3"
-                if panos_version  == "9.1.16":
-                    recommended_version = "9.1.16-h3"
-                if panos_version  == "10.0.0":
+                if panos_version  == "10.0.0" or "10.0.0-b61" or "10.0.1" or "10.0.1-c59" or "10.0.1-c70" or "10.0.2" or "10.0.2-c46" or "10.0.3" or "10.0.3-c31" or "10.0.3-c45" or "10.0.4" or "10.0.4-h2" or "10.0.5" or "10.0.6" or "10.0.7" or "10.0.8" or "10.0.8-h4" or "10.0.8-h8":
                     recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.0-b61":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.1":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.1-c59":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.1-c70":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.2":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.2-c46":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.3":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.3-c31":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.3-c45":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.4":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.4-h2":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.5":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.6":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.7":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.8":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.8-h4":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.8-h8":
-                    recommended_version = "10.0.8-h10"
-                if panos_version  == "10.0.9":
+                if panos_version  == "10.0.9" or "10.0.9-c46" or "10.0.10" or "10.0.10-h1" or "10.0.11" or "10.0.11-h1":
                     recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.9-c46":
-                    recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.10":
-                    recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.10-h1":
-                    recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.11":
-                    recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.11-h1":
-                    recommended_version = "10.0.11-h3"
-                if panos_version  == "10.0.12":
+                if panos_version  == "10.0.12" or "10.0.12-h1":
                     recommended_version = "10.0.12-h3"
-                if panos_version  == "10.0.12-h1":
-                    recommended_version = "10.0.12-h3"
-                if panos_version  == "10.1.0":
+                if panos_version  == "10.1.0" or "10.1.0-b10" or "10.1.0-b17" or "10.1.0-b6" or "10.1.1" or "10.1.2" or "10.1.3":
                     recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.0-b10":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.0-b17":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.0-b6":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.1":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.2":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.3":
-                    recommended_version = "10.1.3-h2"
-                if panos_version  == "10.1.4":
+                if panos_version  == "10.1.4" or "10.1.4-h3" or "10.1.4-h4" or "10.1.5" or "10.1.5-h1" or "10.1.5-h2":
                     recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.4-h3":
-                    recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.4-h4":
-                    recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.5":
-                    recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.5-h1":
-                    recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.5-h2":
-                    recommended_version = "10.1.5-h3"
-                if panos_version  == "10.1.6":
+                if panos_version  == "10.1.6" or "10.1.6-h3" or "10.1.6-h5" or "10.1.6-h6":
                     recommended_version = "10.1.6-h7"
-                if panos_version  == "10.1.6-h3":
-                    recommended_version = "10.1.6-h7"
-                if panos_version  == "10.1.6-h5":
-                    recommended_version = "10.1.6-h7"
-                if panos_version  == "10.1.6-h6":
-                    recommended_version = "10.1.6-h7"
-                if panos_version  == "10.1.7":
+                if panos_version  == "10.1.7" or "10.1.8" or "10.1.8-h1" or "10.1.8-h2" or "10.1.8-h4":
                     recommended_version = "10.1.8-h6"
-                if panos_version  == "10.1.8":
-                    recommended_version = "10.1.8-h6"
-                if panos_version  == "10.1.8-h1":
-                    recommended_version = "10.1.8-h6"
-                if panos_version  == "10.1.8-h2":
-                    recommended_version = "10.1.8-h6"
-                if panos_version  == "10.1.8-h4":
-                    recommended_version = "10.1.8-h6"
-                if panos_version  == "10.1.9":
+                if panos_version  == "10.1.9" or "10.1.9-h1":
                     recommended_version = "10.1.9-h3"
-                if panos_version  == "10.1.9-h1":
-                    recommended_version = "10.1.9-h3"
-                if panos_version  == "10.2.0":
+                if panos_version  == "10.2.0" or "10.2.0-h1" or "10.2.1" or "10.2.2" or "10.2.2-h2" or "10.2.3" or "10.2.3-h2" or "10.2.3-h4":
                     recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.0-h1":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.1":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.2":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.2-h2":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.3":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.3-h2":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "10.2.3-h4":
-                    recommended_version = "10.2.3-h9"
-                if panos_version  == "11.0.0":
-                    recommended_version = "11.0.0-h1"
-                if panos_version  == "11.0.0-b2.dev_e_rel":
-                    recommended_version = "11.0.0-h1"
-                if panos_version  == "11.0.0-b3.dev_e_rel":
-                    recommended_version = "11.0.0-h1"
-                if panos_version  == "11.0.0-b4.dev_e_rel":
-                    recommended_version = "11.0.0-h1"
-                if panos_version  == "11.0.0-b5.dev_e_rel":
-                    recommended_version = "11.0.0-h1"
-                if panos_version  == "11.0.0-c1361":
+                if panos_version  == "11.0.0" or "11.0.0-b2.dev_e_rel" or "11.0.0-b3.dev_e_rel" or "11.0.0-b4.dev_e_rel" or "11.0.0-b5.dev_e_rel" or "11.0.0-c1361":
                     recommended_version = "11.0.0-h1"
                 if panos_version  == "11.0.1":
                     recommended_version = "11.0.1-h2"
@@ -653,21 +336,25 @@ def process_list(ip):
 
         except IOError:
             logging.error("IP Address: "+ip+" connection was refused. Please check connectivity.")
+            devices_failed+=1
             skip = True
             pass
 
         except KeyError:
             logging.error(ip+" Incorrect Username/Password, Command not supported on this platform or API Access is not allowed on this user account.")
+            devices_failed+=1
             skip = True
             pass
 
         except AttributeError:
             logging.error("No API key was returned.  Insufficient privileges or incorrect credentials given.")
+            devices_failed+=1
             skip = True
             pass
 
         except:
             print(ip)
+            devices_failed+=1
             skip = True
             pass
 
@@ -679,7 +366,8 @@ def multi_processing():
     results = [r.get() for r in res]
 devices, username, password = get_devices()
 multi_processing()
-total_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count
+total_reachable_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count
+total_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count+devices_failed
 print("\n\n")
 console.print(unsupported_table)
 print("\n\n")
@@ -696,6 +384,8 @@ results_table.add_row("Number of Devices that require a PANOS upgrade and Conten
 results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on #ffff87")
 results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
 results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
+results_table.add_row("Number of Devices Checked", str(total_reachable_count))
+results_table.add_row("Number of Devices not checked", str(devices_failed))
 results_table.add_row("Total Devices", str(total_count))
 console.print(results_table)
 
