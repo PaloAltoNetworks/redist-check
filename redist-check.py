@@ -50,7 +50,7 @@ supported_table.add_column("Device Name", width=15, justify="center")
 supported_table.add_column("IP Address", justify="center")
 supported_table.add_column("SW Version", justify="center")
 supported_table.add_column("Scenario 1", justify="center")
-supported_table.add_column("Upgrade to Version", justify="center")
+supported_table.add_column("Suggested PANOS Version", justify="center")
 supported_table.add_column("Content Version", justify="center")
 supported_table.add_column("Scenario 2", justify="center")
 supported_table.add_column("Redist Agent", justify="center")
@@ -626,6 +626,9 @@ def process_list(ip):
                 if agent_status == "disabled" and client_status == "disabled":
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
+                elif agent_status == "enabled" and int(number_of_clients) == 0:
+                    supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
+                    supported_devices_count+=1
                 else:
                     os_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                     os_devices_count+=1
@@ -639,6 +642,9 @@ def process_list(ip):
                     if supported_content_version == "No":
                         content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
+                elif agent_status == "enabled" and int(number_of_clients) == 0:
+                    supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
+                    supported_devices_count+=1
 
                 else:
                     if supported_content_version == "No":
