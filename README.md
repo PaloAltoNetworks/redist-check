@@ -67,7 +67,7 @@ This will display usage examples and different argument options available for th
 
 ## Step 4
 
-Run the following command. If you wish to use any of the options mentioned earlier, please add those to your command:
+Run the following command. If you wish to use any of the argument options mentioned earlier, please add those to your command:
 
 ```
 python3 redist-check.py
