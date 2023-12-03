@@ -1,24 +1,27 @@
 # ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/palo.ico?raw=true) redist-check
-This tool was built to check for PANOS Devices with Certificates that will expire on 12-31-23.  The tool can check for PANOS and Content Versions of Palo Alto Networks NGFW & Panorama devices and will determine which devices need a PANOS Upgrade or Content Version Update.  You’ll need to create a text file with your PANOS NGFW and Panorama IP Addresses in it as such:
+This tool empowers you to effortlessly determine the PAN-OS Version and Content-Version running on your Palo Alto Networks Next Generation Firewalls and Panorama devices. The primary objective is to ensure that your devices operate on a PAN-OS and Content version unaffected by the expiration of root and default certificates on December 31st, 2023.  For further details, please refer to these links below:
+
+### [PAN-OS Root and Default Certificate Expiration on December 31, 2023](https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE)
+### [Emergency Update Required - PAN-OS Root and Default Certificate Expiration](https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672)
+
+Before we dive in, let's go over the prerequisites for using this tool. First, make sure you're running Python version 3.x or greater on the host you will be using to run this tool. Second, create a text file containing the IP addresses of your PANOS Next Generation Firewalls and Panorama devices. Save this file in the same location where you'll run the Self Impact Discovery Tool.  Below is an Example:
+
 ```
 192.168.1.1
 10.1.1.1
 172.16.1.1
 ```
-Any text editor will do as long as you save it in basic text format.  The tool does require Python Version 3.x or greater to run.  The 'PANOS_Recommend.html' file is a web page with lots of info for getting a recommended release for your affected PANOS Version with links on instructions, HowTo's and TAC Support Info.  For further details, please refer to these links below:
-
-### [PAN-OS Root and Default Certificate Expiration on December 31, 2023](https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA14u0000008Vp5CAE)
-### [Emergency Update Required - PAN-OS Root and Default Certificate Expiration](https://live.paloaltonetworks.com/t5/customer-advisories/emergency-update-required-pan-os-root-and-default-certificate/ta-p/564672)
+Any text editor will do as long as you save it in basic text format.
 
 ## Step 1:
 
-Download the tool from this site:  
+Download the tool from this site by clicking on the Green Button in the Upper Right-Hand corner labeled "Code." Next, click on "Download ZIP." This action will download everything you need to proceed to the following steps.
 
 https://github.com/PaloAltoNetworks/redist-check/blob/main
 
 ## Step 2:
 
-There is a requirements.txt file and you’ll need to run this command in a terminal Window of your host in order to use redist-check.py.  Unpack the contents into a folder of your choice and navigate to the path of that folder via CLI and run the command below:
+Once downloaded to a folder of your choice, extract the file into that folder. Open a terminal window or CLI on your platform, navigate to the folder where you extracted the tool, and run the following command:
 
 ```console
 pip3 install -r requirements.txt
@@ -26,8 +29,7 @@ pip3 install -r requirements.txt
 
 ## Step 3
 
-Once requirements are installed, you can type 'python3 redist-check.py -h' and the following will display the Usage Examples and different argument options that can be used for this tool:
-
+After installing the requirements, type the following command:
 ```console
 python3 redist-check.py -h
 
@@ -53,30 +55,34 @@ optional arguments:
 
 ```
 
+This will display usage examples and different argument options available for this tool:
+
 '-x' argument will suppress the Pop-Up Links for the KB and Instructions at the beginning.
 
 '-w' argument will create an HTML file of the results.  You can specify an HTML filename of your choice if desired.
 
 '-o' argument will open the HTML file in your browser at completion.
 
-### All of these arguments are optional and not required.
+### These arguments are optional and not required.
 
 ## Step 4
 
-Below is an example of output after running this command:
+Run the following command. If you wish to use any of the options mentioned earlier, please add those to your command:
 
 ```
 python3 redist-check.py
 ```
-The results are color-coded.  If the result is green, then no action needs to be taken.  If the result is in yellow, then one of the actions needs to be taken.  If the result is in red, then both actions need to be taken.
 
-You do not have to be superuser to run this script on your host; readonly-superuser will work.  
+You'll be prompted to enter the name of the text file you created earlier and your credentials. Ensure you use credentials with API access rights. MFA credentials will not work with this tool. Use a common local service account; superuser rights are not necessary—readonly-superuser will work.
+
+Once the tool finishes running, you'll see results with different colors. Green indicates no action is needed, yellow means action is required based on the scenarios explained in the links on this GitRepo, and red means both actions need to be taken.
 
 Example:
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/output_example.png?raw=true)
 
-Below is a screenshot of the web page:
+
+Additionally, there's a webpage in the tool you can access in the same folder. The file is called PANOS_Recommend.html. Open this file with your chosen browser, and a page will appear that you can use to check any other PAN-OS Version you may be running. This webpage is designed for Scenario 1 only.  Below is a screenshot of the web page:
 
 
 ![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/webpage_example.png?raw=true)
