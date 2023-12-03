@@ -79,7 +79,7 @@ Once the tool finishes running, you'll see results with different colors. Green 
 
 Example:
 
-![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/output_example.png?raw=true)
+![alt text](https://github.com/PaloAltoNetworks/redist-check/blob/main/output_example.png?v=2?raw=true)
 
 
 Additionally, there's a webpage in the tool you can access in the same folder. The file is called PANOS_Recommend.html. Open this file with your chosen browser, and a page will appear that you can use to check any other PAN-OS Version you may be running. This webpage is designed for Scenario 1 only.  Below is a screenshot of the web page:
