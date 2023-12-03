@@ -19,7 +19,7 @@ from argparse import RawTextHelpFormatter
 
 parser = argparse.ArgumentParser(add_help=True,
                     formatter_class=RawTextHelpFormatter,
-                    description='Usage Examples: \n\n\tpython3 redist-check.py\n\n\tpython3 redist-check.py -x /// This one suppresses PopUp Links\n\n\tpython3 redist-check.py -x -w yourfile.html -o\n\n\tpython3 redist-check.py -oxw yourfile.html\n\n\tpython3 redist-check.py -xw -o /// This one will use output.html by default')
+                    description='Usage Examples: \n\n\tpython3 redist-check.py -x\n\n\tpython3 redist-check.py -xw\n\n\tpython3 redist-check.py -xow\n\n\tpython3 redist-check.py -xw yourfile.html\n\n\tpython3 redist-check.py -xow yourfile.html')
 
 parser.add_argument("-x", action = "store_true", help="Optional - Disable Links Pop-Up")
 
