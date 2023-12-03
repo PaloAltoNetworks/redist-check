@@ -37,15 +37,15 @@ usage: redist-check.py [-h] [-x] [-w [W]] [-o]
 
 Usage Examples: 
 
-	python3 redist-check.py
+	python3 redist-check.py -x
 
-	python3 redist-check.py -x /// This one suppresses PopUp Links
+	python3 redist-check.py -xw
 
-	python3 redist-check.py -x -w yourfile.html -o
+	python3 redist-check.py -xow
 
-	python3 redist-check.py -oxw yourfile.html
+	python3 redist-check.py -xw yourfile.html
 
-	python3 redist-check.py -xw -o /// This one will use output.html by default
+	python3 redist-check.py -xow yourfile.html
 
 optional arguments:
   -h, --help  show this help message and exit
