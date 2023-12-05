@@ -10,12 +10,10 @@ from multiprocessing import Process
 from multiprocessing.dummy import Pool as ThreadPool
 from multiprocessing import cpu_count
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 import webbrowser
 import argparse
 from argparse import RawTextHelpFormatter
+requests.packages.urllib3.disable_warnings()
 
 parser = argparse.ArgumentParser(add_help=True,
                     formatter_class=RawTextHelpFormatter,
@@ -128,7 +126,6 @@ def get_devices():
         print('File Not Found')
         k=input("press Enter to exit")
         raise SystemExit(1)
-        # pass
 
 def process_list(ip):
     global supported_devices_count, os_devices_count,content_devices_count, unsupported_devices_count, devices_failed
