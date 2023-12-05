@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
+# *****************************************************************************
+# * Copyright (c) 2008-2023, Palo Alto Networks. All rights reserved.         *
+# *                                                                           *
+# * This Software is the property of Palo Alto Networks. The Software and all *
+# * accompanying documentation are copyrighted.                               *
+# *****************************************************************************
 from getpass import getpass
 import sys
 import os
+import csv
 import logging
 import xmltodict
 from rich.console import Console
@@ -15,15 +22,26 @@ import argparse
 from argparse import RawTextHelpFormatter
 requests.packages.urllib3.disable_warnings()
 
+supported_csv = []
+unsupported_csv = []
+os_csv = []
+content_csv = []
+supported_file = 'supported.csv'
+unsupported_file = 'unsupported.csv'
+os_file = 'os.csv'
+content_file = 'content.csv'
+
 parser = argparse.ArgumentParser(add_help=True,
                     formatter_class=RawTextHelpFormatter,
-                    description='Usage Examples: \n\n\tpython3 redist-check.py -x\n\n\tpython3 redist-check.py -xw\n\n\tpython3 redist-check.py -xow\n\n\tpython3 redist-check.py -xw yourfile.html\n\n\tpython3 redist-check.py -xow yourfile.html')
+                    description='Usage Examples: \n\n\tpython3 redist-check.py -x\n\n\tpython3 redist-check.py -xw\n\n\tpython3 redist-check.py -xow\n\n\tpython3 redist-check.py -cxow\n\n\tpython3 redist-check.py -xw yourfile.html\n\n\tpython3 redist-check.py -xow yourfile.html')
 
 parser.add_argument("-x", action = "store_true", help="Optional - Disable Links Pop-Up")
 
 parser.add_argument("-w", required='-o' in sys.argv, nargs='?', const='output.html', help="Optional - Create WebPage from output.  If no file is specified after '-w', then 'output.html' will be used")
 
 parser.add_argument("-o", action = "store_true", help="Requires '-w' - Open Results in Web Browser")
+
+parser.add_argument("-c", action = "store_true", help="Writes CSV for each Scenario (4 total)")
 
 args = parser.parse_args()
 
@@ -634,51 +652,76 @@ def process_list(ip):
             if supported_version == "Yes" and supported_content_version == "Yes":
                 supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                 supported_devices_count+=1
+                if args.c:
+                    supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
 
             elif supported_version == "No" and supported_content_version == "Yes":
                 if agent_status == "disabled" and client_status == "disabled":
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
+                    if args.c:
+                        supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
+
                 elif agent_status == "enabled" and int(number_of_clients) == 0 and agents_present == 'N/A':
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
+                    if args.c:
+                        supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
                 elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
                     if panorama in redist_clients_status['response']['result']:
                         supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                         supported_devices_count+=1
+                        if args.c:
+                            supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
                 else:
                     os_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                     os_devices_count+=1
+                    if args.c:
+                        os_csv.append([model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
 
             elif supported_version == "Yes" and supported_content_version == "No":
                 content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                 content_devices_count+=1
+                if args.c:
+                    content_csv.append([model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present])
 
             elif supported_version == "No":
                 if agent_status == "disabled" and client_status == "disabled":
                     if supported_content_version == "No":
                         content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
+                        if args.c:
+                            content_csv.append([model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present])
                 elif agent_status == "enabled" and int(number_of_clients) == 0 and agents_present == 'N/A':
                     if supported_content_version == "No":
                         content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
+                        if args.c:
+                            content_csv.append([model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present])
                     else:
                         supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                         supported_devices_count+=1
+                        if args.c:
+                            supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
                 elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
                     if panorama in redist_clients_status['response']['result']:
                         if supported_content_version == "No":
                             content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                             content_devices_count+=1
+                            if args.c:
+                                content_csv.append([model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present])
                         else:
                             supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                             supported_devices_count+=1
+                            if args.c:
+                                supported_csv.append([model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present])
 
                 else:
                     if supported_content_version == "No":
                         unsupported_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ff8787")
                         unsupported_devices_count+=1
+                        if args.c:
+                            unsupported_csv.append([model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present])
 
         except IOError:
             logging.error("IP Address: "+ip+" connection was refused. Please check connectivity.")
@@ -741,6 +784,38 @@ if args.w:
         webbrowser.open('file://'+os.path.dirname(os.path.realpath(__file__))+'/'+html_file, new = 2)
     else:
         pass
+
+if args.c:
+    supported_csv.sort()
+    unsupported_csv.sort()
+    os_csv.sort()
+    content_csv.sort()
+    supported_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Suggested PANOS Version', 'Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
+    unsupported_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Upgrade to Version', 'Content Version', 'Upgrade to Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
+    os_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Upgrade to Version', 'Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
+    content_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Suggested PANOS Version', 'Content Version', 'Upgrade to Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
+
+    with open(supported_file, 'w') as s:
+        write = csv.writer(s)
+        write.writerow(supported_fields)
+        write.writerows(supported_csv)
+
+    with open(unsupported_file, 'w') as u:
+        write = csv.writer(u)
+        write.writerow(unsupported_fields)
+        write.writerows(unsupported_csv)
+
+    with open(os_file, 'w') as o:
+        write = csv.writer(o)
+        write.writerow(os_fields)
+        write.writerows(os_csv)
+
+    with open(content_file, 'w') as c:
+        write = csv.writer(c)
+        write.writerow(content_fields)
+        write.writerows(content_csv)
+else:
+    pass
 
 print("\n\n")
 k=input("press Enter to exit")
