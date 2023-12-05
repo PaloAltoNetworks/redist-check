@@ -172,10 +172,14 @@ def process_list(ip):
             userid_client_response = requests.post(full_url, verify=False)
             redist_agent_status = xmltodict.parse(userid_service_response.text)
             redist_client_status = xmltodict.parse(userid_client_response.text)
+
             if "up" in redist_agent_status['response']['result'].split('\n\t')[1]:
                 agent_status = "enabled"
-                if int(redist_agent_status['response']['result'].split('\n\t')[7].replace("number of clients:", "")) > 0:
-                    number_of_clients = str(int(redist_agent_status['response']['result'].split('\n\t')[7].replace("number of clients:", "")))
+                sub = 'number of clients:'
+                my_list = redist_agent_status['response']['result'].split('\n\t')
+                client_total = next((s for s in my_list if sub in s), None).replace("number of clients:", "").replace(" ", "")
+                if int(client_total) > 0:
+                    number_of_clients = client_total
             elif "down" in redist_agent_status['response']['result'].split('\n\t')[1]:
                 agent_status = "disabled"
                 number_of_clients = "N/A"
