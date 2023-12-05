@@ -663,12 +663,20 @@ def process_list(ip):
                         content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
                 elif agent_status == "enabled" and int(number_of_clients) == 0 and agents_present == 'N/A':
-                    supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
-                    supported_devices_count+=1
-                elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
-                    if panorama in redist_clients_status['response']['result']:
+                    if supported_content_version == "No":
+                        content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
+                        content_devices_count+=1
+                    else:
                         supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                         supported_devices_count+=1
+                elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
+                    if panorama in redist_clients_status['response']['result']:
+                        if supported_content_version == "No":
+                            content_table.add_row(model, devicename, ip, panos_version, 'No', 'N/A', content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
+                            content_devices_count+=1
+                        else:
+                            supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
+                            supported_devices_count+=1
 
                 else:
                     if supported_content_version == "No":
