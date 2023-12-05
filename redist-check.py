@@ -144,7 +144,8 @@ def process_list(ip):
     client_status = ''
     agents_present = ''
     try:
-        uri = "/api/?type=keygen&user=" + username + "&password=" + password
+
+        uri = "/api/?type=keygen&user=" + username + "&password=" + requests.utils.quote(password)
         full_url = "https://" + ip + uri
         api_response = requests.post(full_url, verify=False, timeout=15)
         result_dict = xmltodict.parse(api_response.text)
@@ -172,12 +173,13 @@ def process_list(ip):
             userid_client_response = requests.post(full_url, verify=False)
             redist_agent_status = xmltodict.parse(userid_service_response.text)
             redist_client_status = xmltodict.parse(userid_client_response.text)
-
-            if "up" in redist_agent_status['response']['result'].split('\n\t')[1]:
+            user_id_service = 'User id service:'
+            client_number = 'number of clients:'
+            my_list = redist_agent_status['response']['result'].split('\n\t')
+            agent_status = next((s for s in my_list if user_id_service in s), None).replace("User id service:", "").replace(" ", "")
+            if agent_status == 'up':
                 agent_status = "enabled"
-                sub = 'number of clients:'
-                my_list = redist_agent_status['response']['result'].split('\n\t')
-                client_total = next((s for s in my_list if sub in s), None).replace("number of clients:", "").replace(" ", "")
+                client_total = next((s for s in my_list if client_number in s), None).replace("number of clients:", "").replace(" ", "")
                 if int(client_total) > 0:
                     number_of_clients = client_total
             elif "down" in redist_agent_status['response']['result'].split('\n\t')[1]:
