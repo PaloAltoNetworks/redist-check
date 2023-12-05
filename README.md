@@ -33,7 +33,7 @@ After installing the requirements, type the following command:
 ```console
 python3 redist-check.py -h
 
-usage: redist-check.py [-h] [-x] [-w [W]] [-o]
+usage: redist-check.py [-h] [-x] [-w [W]] [-o] [-c]
 
 Usage Examples: 
 
@@ -42,6 +42,8 @@ Usage Examples:
 	python3 redist-check.py -xw
 
 	python3 redist-check.py -xow
+
+	python3 redist-check.py -cxow
 
 	python3 redist-check.py -xw yourfile.html
 
@@ -52,6 +54,7 @@ optional arguments:
   -x          Optional - Disable Links Pop-Up
   -w [W]      Optional - Create WebPage from output.  If no file is specified after '-w', then 'output.html' will be used
   -o          Requires '-w' - Open Results in Web Browser
+  -c          Writes CSV for each Scenario (4 total)
 
 ```
 
@@ -62,6 +65,8 @@ This will display usage examples and different argument options available for th
 '-w' argument will create an HTML file of the results.  You can specify an HTML filename of your choice if desired.
 
 '-o' argument will open the HTML file in your browser at completion.
+
+'-c' argument will create 4 csv files at completion.(supported.csv, unsupported.csv, os.csv, content.csv)
 
 ### These arguments are optional and not required.
 
