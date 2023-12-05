@@ -642,14 +642,13 @@ def process_list(ip):
                 if agent_status == "disabled" and client_status == "disabled":
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
-                elif agent_status == "enabled" and int(number_of_clients) == 0:
+                elif agent_status == "enabled" and int(number_of_clients) == 0 and agents_present == 'N/A':
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
-                elif agent_status == "enabled" and int(number_of_clients)  == 2:
+                elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
                     if panorama in redist_clients_status['response']['result']:
                         supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                         supported_devices_count+=1
-
                 else:
                     os_table.add_row(model, devicename, ip, panos_version, 'Yes', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                     os_devices_count+=1
@@ -663,10 +662,10 @@ def process_list(ip):
                     if supported_content_version == "No":
                         content_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, '8776-8390 or greater', 'Yes', agent_status, number_of_clients, client_status, agents_present, style="on #ffff87")
                         content_devices_count+=1
-                elif agent_status == "enabled" and int(number_of_clients) == 0:
+                elif agent_status == "enabled" and int(number_of_clients) == 0 and agents_present == 'N/A':
                     supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                     supported_devices_count+=1
-                elif agent_status == "enabled" and int(number_of_clients)  == 2:
+                elif agent_status == "enabled" and int(number_of_clients) == 2 and agents_present == 'N/A':
                     if panorama in redist_clients_status['response']['result']:
                         supported_table.add_row(model, devicename, ip, panos_version, 'No', recommended_version, content_version, 'No', agent_status, number_of_clients, client_status, agents_present, style="on #afff5f")
                         supported_devices_count+=1
