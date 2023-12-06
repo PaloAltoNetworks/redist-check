@@ -19,6 +19,7 @@ from multiprocessing import cpu_count
 import requests
 import webbrowser
 import argparse
+import ipaddress
 from argparse import RawTextHelpFormatter
 requests.packages.urllib3.disable_warnings()
 
@@ -131,19 +132,29 @@ def get_devices():
             username = input("Login: ")
             password = getpass()
             with open(filename) as df:
-               devices = df.read().splitlines()
+               devices = df.read().splitlines
+
+            while("" in devices):
+                devices.remove("")
 
         else:
             filename = input("Enter filename that contains the list of Panorama and PANOS Device IP Addresses: ")
             username = input("Login: ")
             password = getpass()
+            malformed_ipaddrs = []
             with open(filename) as df:
                devices = df.read().splitlines()
-        return devices, username, password
+
+            while("" in devices):
+                devices.remove("")
+
+        return devices, username, password, filename
+
     except FileNotFoundError:
         print('File Not Found')
         k=input("press Enter to exit")
         raise SystemExit(1)
+
 
 def process_list(ip):
     global supported_devices_count, os_devices_count,content_devices_count, unsupported_devices_count, devices_failed
@@ -160,6 +171,7 @@ def process_list(ip):
     agents_present = ''
     try:
 
+        ip = str(ipaddress.ip_address(ip))
         uri = "/api/?type=keygen&user=" + username + "&password=" + requests.utils.quote(password)
         full_url = "https://" + ip + uri
         api_response = requests.post(full_url, verify=False, timeout=15)
@@ -256,6 +268,11 @@ def process_list(ip):
     except AttributeError:
         logging.error("No API key was returned.  Insufficient privileges or incorrect credentials given.")
         devices_failed+=1
+        skip = True
+        pass
+
+    except ValueError:
+        print('Malformed IP Address -', ip, 'in filename called:', filename)
         skip = True
         pass
 
@@ -753,7 +770,7 @@ def multi_processing():
     pool.close()
     pool.join()
     results = [r.get() for r in res]
-devices, username, password = get_devices()
+devices, username, password, filename = get_devices()
 multi_processing()
 total_reachable_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count
 total_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count+devices_failed
