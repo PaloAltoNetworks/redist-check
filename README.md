@@ -66,7 +66,7 @@ This will display usage examples and different argument options available for th
 
 '-o' argument will open the HTML file in your browser at completion.
 
-'-c' argument will create 4 csv files at completion.(supported.csv, unsupported.csv, os.csv, content.csv, all.csv)
+'-c' argument will create 5 csv files at completion.(supported.csv, unsupported.csv, os.csv, content.csv, all.csv)
 
 ### These arguments are optional and not required.
 
