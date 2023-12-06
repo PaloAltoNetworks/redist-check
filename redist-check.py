@@ -75,7 +75,7 @@ supported_table.add_column("# of Clients", justify="center")
 supported_table.add_column("Redist Client", justify="center")
 supported_table.add_column("Agents Present", justify="center")
 
-unsupported_table = Table(title="Devices that require PANOS Upgrades and Content Updates", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
+unsupported_table = Table(title="Devices that require PANOS Upgrades and Content Updates (Scenario 1 & 2)", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
 unsupported_table.add_column("Device Type", justify="center")
 unsupported_table.add_column("Device Name", justify="center")
 unsupported_table.add_column("IP Address", width=18, justify="center")
@@ -90,7 +90,7 @@ unsupported_table.add_column("# of Clients", justify="center")
 unsupported_table.add_column("Redist Client", justify="center")
 unsupported_table.add_column("Agents Present", justify="center")
 
-os_table = Table(title="Devices that just Require PANOS Upgrades", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
+os_table = Table(title="Devices that just Require PANOS Upgrades (Scenario 1)", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
 os_table.add_column("Device Type", justify="center")
 os_table.add_column("Device Name", justify="center")
 os_table.add_column("IP Address", width=18, justify="center")
@@ -104,7 +104,7 @@ os_table.add_column("# of Clients", justify="center")
 os_table.add_column("Redist Client", justify="center")
 os_table.add_column("Agents Present", justify="center")
 
-content_table = Table(title="Devices that just require Content Updates", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
+content_table = Table(title="Devices that just require Content Updates (Scenario 2)", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
 content_table.add_column("Device Type", justify="center")
 content_table.add_column("Device Name", justify="center")
 content_table.add_column("IP Address", width=18, justify="center")
@@ -809,11 +809,11 @@ results_table = Table(title="Device Summary", show_header=True, header_style="bo
 results_table.add_column("Status", justify="center")
 results_table.add_column("Device Count", justify="center")
 if unsupported_devices_count > 0:
-    results_table.add_row("Number of Devices that require a PANOS upgrade and Content update", str(unsupported_devices_count), style="on #ff8787")
+    results_table.add_row("Number of Devices that require a PANOS upgrade and Content update (Scenario 1 & 2)", str(unsupported_devices_count), style="on #ff8787")
 if os_devices_count > 0:
-    results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on #ffff87")
+    results_table.add_row("Number of Devices that just require a PANOS upgrade (Scenario 1)", str(os_devices_count), style="on #ffff87")
 if content_devices_count > 0:
-    results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
+    results_table.add_row("Number of Devices that just require a Content update (Scenario 2)", str(content_devices_count), style="on #ffff87")
 if supported_devices_count > 0:
     results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
 if total_reachable_count > 0:
