@@ -816,8 +816,10 @@ if content_devices_count > 0:
     results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
 if supported_devices_count > 0:
     results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
-results_table.add_row("Number of Devices Checked", str(total_reachable_count))
-results_table.add_row("Number of Devices not checked", str(devices_failed))
+if total_reachable_count > 0:
+    results_table.add_row("Number of Devices Checked", str(total_reachable_count))
+if devices_failed > 0:
+    results_table.add_row("Number of Devices not checked", str(devices_failed))
 results_table.add_row("Total Devices", str(total_count))
 console.print(results_table)
 
