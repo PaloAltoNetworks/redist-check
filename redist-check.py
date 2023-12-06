@@ -132,7 +132,7 @@ def get_devices():
             username = input("Login: ")
             password = getpass()
             with open(filename) as df:
-               devices = df.read().splitlines
+               devices = df.read().splitlines()
 
             while("" in devices):
                 devices.remove("")
@@ -770,6 +770,7 @@ def multi_processing():
     pool.close()
     pool.join()
     results = [r.get() for r in res]
+
 devices, username, password, filename = get_devices()
 multi_processing()
 total_reachable_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count
