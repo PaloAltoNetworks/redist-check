@@ -54,7 +54,7 @@ optional arguments:
   -x          Optional - Disable Links Pop-Up
   -w [W]      Optional - Create WebPage from output.  If no file is specified after '-w', then 'output.html' will be used
   -o          Requires '-w' - Open Results in Web Browser
-  -c          Writes CSV for each Scenario (4 total)
+  -c          Writes CSV for each Scenario (5 total)
 
 ```
 
@@ -66,7 +66,7 @@ This will display usage examples and different argument options available for th
 
 '-o' argument will open the HTML file in your browser at completion.
 
-'-c' argument will create 4 csv files at completion.(supported.csv, unsupported.csv, os.csv, content.csv)
+'-c' argument will create 4 csv files at completion.(supported.csv, unsupported.csv, os.csv, content.csv, all.csv)
 
 ### These arguments are optional and not required.
 
