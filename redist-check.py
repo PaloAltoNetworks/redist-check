@@ -781,21 +781,41 @@ multi_processing()
 total_reachable_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count
 total_count = unsupported_devices_count+os_devices_count+content_devices_count+supported_devices_count+devices_failed
 print("\n\n")
-console.print(unsupported_table)
-print("\n\n")
-console.print(os_table)
-print("\n\n")
-console.print(content_table)
-print("\n\n")
-console.print(supported_table)
-print("\n\n")
+if unsupported_table.row_count > 0:
+    console.print(unsupported_table)
+    print("\n\n")
+else:
+    pass
+
+if os_table.row_count > 0:
+    console.print(os_table)
+    print("\n\n")
+else:
+    pass
+
+if content_table.row_count > 0:
+    console.print(content_table)
+    print("\n\n")
+else:
+    pass
+
+if supported_table.row_count > 0:
+    console.print(supported_table)
+    print("\n\n")
+else:
+    pass
+
 results_table = Table(title="Device Summary", show_header=True, header_style="bold magenta", show_lines=True, title_justify="center", show_edge=True)
 results_table.add_column("Status", justify="center")
 results_table.add_column("Device Count", justify="center")
-results_table.add_row("Number of Devices that require a PANOS upgrade and Content update", str(unsupported_devices_count), style="on #ff8787")
-results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on #ffff87")
-results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
-results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
+if unsupported_devices_count > 0:
+    results_table.add_row("Number of Devices that require a PANOS upgrade and Content update", str(unsupported_devices_count), style="on #ff8787")
+if os_devices_count > 0:
+    results_table.add_row("Number of Devices that just require a PANOS upgrade", str(os_devices_count), style="on #ffff87")
+if content_devices_count > 0:
+    results_table.add_row("Number of Devices that just require a Content update", str(content_devices_count), style="on #ffff87")
+if supported_devices_count > 0:
+    results_table.add_row("Number of Devices that do not require attention", str(supported_devices_count), style="on #afff5f")
 results_table.add_row("Number of Devices Checked", str(total_reachable_count))
 results_table.add_row("Number of Devices not checked", str(devices_failed))
 results_table.add_row("Total Devices", str(total_count))
@@ -818,25 +838,30 @@ if args.c:
     os_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Upgrade to Version', 'Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
     content_fields = ['Device Type', 'Device Name', 'IP Address', 'SW Version', 'Scenario 1', 'Suggested PANOS Version', 'Content Version', 'Upgrade to Content Version', 'Scenario 2', 'Redist Agent', '# of Clients', 'Redist Client', 'Agents Present']
 
-    with open(supported_file, 'w') as s:
-        write = csv.writer(s)
-        write.writerow(supported_fields)
-        write.writerows(supported_csv)
+    if unsupported_devices_count > 0:
+        with open(unsupported_file, 'w') as u:
+            write = csv.writer(u)
+            write.writerow(unsupported_fields)
+            write.writerows(unsupported_csv)
 
-    with open(unsupported_file, 'w') as u:
-        write = csv.writer(u)
-        write.writerow(unsupported_fields)
-        write.writerows(unsupported_csv)
+    if os_devices_count > 0:
+        with open(os_file, 'w') as o:
+            write = csv.writer(o)
+            write.writerow(os_fields)
+            write.writerows(os_csv)
 
-    with open(os_file, 'w') as o:
-        write = csv.writer(o)
-        write.writerow(os_fields)
-        write.writerows(os_csv)
+    if content_devices_count > 0:
+        with open(content_file, 'w') as c:
+            write = csv.writer(c)
+            write.writerow(content_fields)
+            write.writerows(content_csv)
 
-    with open(content_file, 'w') as c:
-        write = csv.writer(c)
-        write.writerow(content_fields)
-        write.writerows(content_csv)
+    if supported_devices_count > 0:
+        with open(supported_file, 'w') as s:
+            write = csv.writer(s)
+            write.writerow(supported_fields)
+            write.writerows(supported_csv)
+
 else:
     pass
 
