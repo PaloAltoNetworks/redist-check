@@ -134,6 +134,8 @@ def get_devices():
             with open(filename) as df:
                devices = df.read().splitlines()
 
+            devices = [x.replace(' ', '') for x in devices]
+
             while("" in devices):
                 devices.remove("")
 
@@ -144,6 +146,8 @@ def get_devices():
             malformed_ipaddrs = []
             with open(filename) as df:
                devices = df.read().splitlines()
+
+            devices = [x.replace(' ', '') for x in devices]
 
             while("" in devices):
                 devices.remove("")
@@ -272,7 +276,8 @@ def process_list(ip):
         pass
 
     except ValueError:
-        print('Malformed IP Address -', ip, 'in filename called:', filename)
+        print('Malformed IP Address or hostname -', ip, 'in filename called:', filename)
+        devices_failed+=1
         skip = True
         pass
 
