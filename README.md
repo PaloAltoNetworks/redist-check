@@ -11,7 +11,7 @@ Before we dive in, let's go over the prerequisites for using this tool. First, m
 10.1.1.1
 172.16.1.1
 ```
-Any text editor will do as long as you save it in basic text format.  If there are any errors in the file, (ie extra carraige returns, invalid IP's) the tool will tell you and skip them.
+Any text editor will do as long as you save it in basic text format.  If there are any errors in the file, (ie extra carraige returns, invalid IP's) the tool will tell you and skip them.  Do not use FQDN's.  IP Addresses only.
 
 ## Step 1:
 
