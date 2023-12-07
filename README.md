@@ -26,6 +26,14 @@ Once downloaded to a folder of your choice, extract the file into that folder. O
 ```console
 pip3 install -r requirements.txt
 ```
+## Note for Windows Users:
+
+If you are running Microsoft Windows 10, you may need to run the following commands as well:
+
+```console
+python3 -m pip install --upgrade --user urllib3
+python3 -m pip install
+```
 
 ## Step 3
 
