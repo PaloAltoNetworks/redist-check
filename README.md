@@ -42,8 +42,8 @@ python3 -m pip install
 ```
 ## or
 ```console
-python3 -m pip install --upgrade --user urllib3
-python3 -m pip install
+python -m pip install --upgrade --user urllib3
+python -m pip install
 ```
 ## Step 3
 
