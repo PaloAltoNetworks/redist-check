@@ -26,6 +26,12 @@ Once downloaded to a folder of your choice, extract the file into that folder. O
 ```console
 pip3 install -r requirements.txt
 ```
+## or
+
+```console
+pip install -r requirements.txt
+```
+
 ## Note for Windows Users:
 
 If you are running Microsoft Windows 10, you may need to run the following commands as well:
@@ -34,7 +40,11 @@ If you are running Microsoft Windows 10, you may need to run the following comma
 python3 -m pip install --upgrade --user urllib3
 python3 -m pip install
 ```
-
+## or
+```console
+python3 -m pip install --upgrade --user urllib3
+python3 -m pip install
+```
 ## Step 3
 
 After installing the requirements, type the following command:
@@ -85,7 +95,10 @@ Run the following command. If you wish to use any of the argument options mentio
 ```
 python3 redist-check.py
 ```
-
+## or
+```
+python redist-check.py
+```
 You'll be prompted to enter the name of the text file you created earlier and your credentials. Ensure you use credentials with API access rights. MFA credentials will not work with this tool. Use a common local service account; superuser rights are not necessary—readonly-superuser will work.
 
 Once the tool finishes running, you'll see results with different colors. Green indicates no action is needed, yellow means action is required based on the scenarios explained in the links on this GitRepo, and red means both actions need to be taken.
